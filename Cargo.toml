@@ -17,3 +17,4 @@ embassy-time = { version = "0.5.0", features = ["defmt"] }
 embassy-sync = { version = "0.8.0", features = ["defmt"] }
 embassy-futures = "0.1"
 embedded-hal-async = "1.0.0"
+embedded-hal = "1.0.0"

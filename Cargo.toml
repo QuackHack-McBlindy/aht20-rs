@@ -1,0 +1,14 @@
+[package]
+name = "aht20"
+version = "0.1.0"
+authors = ["QuackHack-McBlindy"]
+license = "MIT"
+description = "bare metal no_std components"
+repository = "https://github.com/QuackHack-McBlindy/no_std_components"
+readme = "README.md"
+keywords = ["esp-hal", "embedded", "esp32"]
+categories = ["development-tools::embedded"]
+edition = "2024"
+
+[dependencies]
+

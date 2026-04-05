@@ -3,6 +3,8 @@
 use core::fmt;
 use embedded_hal::i2c::I2c as BlockingI2c;
 use embedded_hal_async::i2c::I2c as AsyncI2c;
+use embedded_hal_async::delay::DelayNs;
+
 
 /// AHT20 I2C address.
 pub const AHT20_ADDR: u8 = 0x38;
@@ -64,13 +66,17 @@ pub fn read_blocking<I2C: BlockingI2c>(i2c: &mut I2C) -> Result<(f32, f32), Erro
 
 /// Async read using `embedded_hal_async::i2c::I2c`.
 /// Requires an async delay implementation (e.g. `embassy_time`).
-pub async fn read_async<I2C: AsyncI2c, D: embassy_time::Delay>(
+pub async fn read_async<I2C: AsyncI2c, D: DelayNs>(
     i2c: &mut I2C,
     delay: &mut D,
 ) -> Result<(f32, f32), Error> {
     let init_cmd = [0xBE, 0x08, 0x00];
     i2c.write(AHT20_ADDR, &init_cmd).await.map_err(|_| Error::I2c)?;
     delay.delay_ms(10).await;
+
+    let measure_cmd = [0xAC, 0x33, 0x00];
+    i2c.write(AHT20_ADDR, &measure_cmd).await.map_err(|_| Error::I2c)?;
+    delay.delay_ms(80).await;
 
     let measure_cmd = [0xAC, 0x33, 0x00];
     i2c.write(AHT20_ADDR, &measure_cmd).await.map_err(|_| Error::I2c)?;

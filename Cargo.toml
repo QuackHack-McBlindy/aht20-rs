@@ -7,7 +7,7 @@ description = "bare metal no_std components"
 repository = "https://github.com/QuackHack-McBlindy/no_std_components"
 readme = "README.md"
 keywords = ["esp-hal", "embedded", "esp32"]
-categories = ["development-tools::embedded"]
+categories = ["embedded"]
 edition = "2024"
 
 [dependencies]
